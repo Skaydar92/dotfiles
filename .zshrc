@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -112,7 +112,8 @@ source $ZSH/oh-my-zsh.sh
 
 
 alias ls="exa --icons -l"
-
+alias fast='nix-shell ~/Shells/shell.nix'
+alias nixcfg="sudo vim /etc/nixos/configuration.nix"
 
 
 
