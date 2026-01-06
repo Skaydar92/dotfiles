@@ -86,6 +86,7 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.felix = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "felix";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
@@ -98,6 +99,8 @@
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -114,6 +117,8 @@
 	pkgs.prismlauncher
 	pkgs.git
 	pkgs.gh
+	pkgs.zsh
+	eza
 	vim
   ];
 
