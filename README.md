@@ -1,2 +1,2 @@
 # dotfiles
-DotFiles for NixOS
+This Repository contains the Configuration Files for my NixOS Configuration.
