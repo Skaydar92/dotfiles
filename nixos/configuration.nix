@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # ./basic-webserver.nix
     ];
 
   # Bootloader.
@@ -93,6 +94,8 @@
     packages = with pkgs; [
       kdePackages.kate
       pkgs.vesktop
+      pkgs.libreoffice
+      # pkgs.steam
     #  thunderbird
     ];
   };
@@ -101,9 +104,14 @@
   programs.firefox.enable = true;
 
   programs.zsh.enable = true;
+ 
+  programs.steam.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Allow nix command
+  nix.settings.experimental-features = [ "nix-command" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -114,10 +122,10 @@
 	pkgs.winboat
 	pkgs.kitty
 	pkgs.brave
-	pkgs.prismlauncher
 	pkgs.git
 	pkgs.gh
 	pkgs.zsh
+	pkgs.prismlauncher
 	eza
 	vim
   ];
