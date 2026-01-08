@@ -5,11 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # ./hardware-configuration.nix
-      # ./home.nix
-    ];
+  imports = [ ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -93,6 +89,7 @@
     description = "Felix Busch";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
+      pkgs.zsh-powerlevel10k
       kdePackages.kate
       pkgs.libreoffice
       pkgs.obsidian
@@ -102,7 +99,22 @@
   };
 
   programs.firefox.enable = true;
-  programs.zsh.enable = true;
+
+  programs.zsh = {
+    enable = true;
+    promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    shellAliases = {
+        nixrb = "sudo nixos-rebuild switch --flake /etc/nixos#ThinkPad";
+    };
+  };
+  
+
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    plugins = [ "git" "sudo" "docker" "colorize" ];
+    # theme = "powerlevel10k/powerlevel10k";
+  };
+
   programs.steam.enable = true;
 
   # Allow unfree packages
@@ -125,7 +137,7 @@
 	pkgs.zsh
 	pkgs.prismlauncher
         pkgs.fastfetch
-	home-manager
+	pkgs.zsh-powerlevel10k
 	eza
 	vim
   ];
