@@ -7,4 +7,6 @@
 	programs.git.enable = true;
 	home.stateVersion = "25.05";
 	home.enableNixpkgsReleaseCheck = false;
+	
+	programs.vesktop.enable = true;
 }

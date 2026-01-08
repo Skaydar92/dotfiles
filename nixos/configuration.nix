@@ -12,7 +12,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "ThinkPad"; 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -49,6 +49,12 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
+
+  # Mullvad
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -105,6 +111,9 @@
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     shellAliases = {
         nixrb = "sudo nixos-rebuild switch --flake /etc/nixos#ThinkPad";
+	nixcfg = "sudo vim /etc/nixos/configuration.nix";
+	homecfg = "sudo vim /etc/nixos/home.nix";
+	flakecfg = "sudo vim /etc/nixos/flake.nix";
     };
   };
   
@@ -156,14 +165,12 @@
   # };
 
   # List services that you want to enable:
-	
-    services.mullvad-vpn.enable = true;
     
     services.tailscale.enable = true;
 
-    services.openssh = {
-      enable = true;
-    };
+    # services.openssh = {
+    #   enable = true;
+    # };
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
