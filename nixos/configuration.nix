@@ -117,15 +117,22 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
 	pkgs.winboat
+	pkgs.bat
 	pkgs.kitty
 	pkgs.brave
 	pkgs.git
 	pkgs.gh
 	pkgs.zsh
 	pkgs.prismlauncher
+        pkgs.fastfetch
 	home-manager
 	eza
 	vim
+  ];
+  
+  fonts.packages = with pkgs; [
+    nerd-fonts.hurmit
+    nerd-fonts.jetbrains-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
