@@ -27,6 +27,12 @@
           }
         ];
       };
+      
+      exampleIso = nixpkgs.lib.nixosSystem {
+	modules = [
+	  ./hosts/isoimage/configuration.nix
+	];
+      };
     };
   };
 }

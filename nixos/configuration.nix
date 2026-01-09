@@ -109,6 +109,8 @@
   programs.zsh = {
     enable = true;
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
         nixrb = "sudo nixos-rebuild switch --flake /etc/nixos#ThinkPad";
 	nixcfg = "sudo vim /etc/nixos/configuration.nix";
@@ -120,7 +122,7 @@
 
   programs.zsh.ohMyZsh = {
     enable = true;
-    plugins = [ "git" "sudo" "docker" "colorize" ];
+    plugins = [ "git" "sudo" "docker" "colorize" "tmux" ];
     # theme = "powerlevel10k/powerlevel10k";
   };
 
@@ -168,9 +170,19 @@
     
     services.tailscale.enable = true;
 
-    # services.openssh = {
-    #   enable = true;
-    # };
+    services.ollama = {
+      enable = true;
+      loadModels = [ "llama3.2:3b" "deepseek-r1:1.5b"];
+      # acceleration = "vulkan";
+    };
+    
+    services.openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = true;
+	PermitRootLogin = "yes";
+      };
+    };
 
   system.stateVersion = "25.11"; # Did you read the comment?
 
