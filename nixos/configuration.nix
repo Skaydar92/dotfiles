@@ -6,6 +6,17 @@
 
 {
   imports = [ ];
+  
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+        FastConnectable = true;
+      };
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -13,6 +24,16 @@
 
   networking.hostName = "ThinkPad"; 
   networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  networking.firewall = { 
+    enable = true;
+    allowedTCPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];  
+    allowedUDPPortRanges = [ 
+      { from = 1714; to = 1764; } # KDE Connect
+    ];  
+  };  
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -97,8 +118,11 @@
     packages = with pkgs; [
       pkgs.zsh-powerlevel10k
       kdePackages.kate
+      pkgs.kdePackages.kdeconnect-kde
+      pkgs.kdePackages.sddm-kcm
       pkgs.libreoffice
       pkgs.obsidian
+      pkgs.remmina
       # pkgs.steam
       # thunderbird
     ];
@@ -149,6 +173,7 @@
 	pkgs.prismlauncher
         pkgs.fastfetch
 	pkgs.zsh-powerlevel10k
+	pkgs.neovim
 	eza
 	vim
   ];
