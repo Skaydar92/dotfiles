@@ -15,15 +15,15 @@
       ThinkPad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/ThinkPad/configuration.nix
-          ./hosts/ThinkPad/hardware-configuration.nix
+          ./configuration.nix
+          ./hardware-configuration.nix
 	  nvf.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.felix = import ./hosts/ThinkPad/home.nix;
+              users.felix = import ./home.nix;
               backupFileExtension = "backup";
             };
           }
@@ -31,9 +31,9 @@
       };
 
       
-      Server = nixpkgs.lib.nixosSystem {
+      exampleIso = nixpkgs.lib.nixosSystem {
 	modules = [
-	  ./hosts/Server/configuration.nix
+	  ./hosts/isoimage/configuration.nix
 	];
       };
 
