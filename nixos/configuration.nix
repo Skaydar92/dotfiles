@@ -68,7 +68,10 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "Elegant";
+  };
   services.desktopManager.plasma6.enable = true;
 
   # Mullvad
@@ -130,6 +133,32 @@
 
   programs.firefox.enable = true;
 
+  programs.nvf = {
+    enable = true;
+    settings = {
+      vim = {
+        lsp.enable = true;
+        theme = {
+          enable = true;
+          name = "gruvbox";
+          style = "dark";
+        };
+
+        statusline.lualine.enable = true;
+        telescope.enable = true;
+        autocomplete.nvim-cmp.enable = true;
+
+        languages = {
+          enableTreesitter = true;
+
+          nix.enable = true;
+          ts.enable = true;
+          rust.enable = true;
+        };
+      };
+    };
+  };
+
   programs.zsh = {
     enable = true;
     promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
@@ -137,9 +166,9 @@
     syntaxHighlighting.enable = true;
     shellAliases = {
         nixrb = "sudo nixos-rebuild switch --flake /etc/nixos#ThinkPad";
-	nixcfg = "sudo vim /etc/nixos/configuration.nix";
-	homecfg = "sudo vim /etc/nixos/home.nix";
-	flakecfg = "sudo vim /etc/nixos/flake.nix";
+	nixcfg = "sudo nvim /etc/nixos/configuration.nix";
+	homecfg = "sudo nvim /etc/nixos/home.nix";
+	flakecfg = "sudo nvim /etc/nixos/flake.nix";
     };
   };
   
@@ -174,6 +203,7 @@
         pkgs.fastfetch
 	pkgs.zsh-powerlevel10k
 	pkgs.neovim
+        pkgs.elegant-sddm
 	eza
 	vim
   ];

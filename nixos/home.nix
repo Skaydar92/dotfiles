@@ -9,4 +9,6 @@
 	home.enableNixpkgsReleaseCheck = false;
 	
 	programs.vesktop.enable = true;
+
+	home.packages = [ pkgs.vscode ];
 }
