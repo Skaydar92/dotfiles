@@ -144,13 +144,21 @@
     settings = {
       vim = {
         lsp.enable = true;
+        ui = {
+          borders.enable = true;
+          colorizer.enable = true;
+        };
         theme = {
           enable = true;
-          name = "gruvbox";
-          style = "dark";
+          name = "catppuccin";
+          style = "mocha";
         };
 
-        statusline.lualine.enable = true;
+        statusline.lualine = {
+          enable = true;
+          theme = "catppuccin";
+        };
+
         telescope.enable = true;
         autocomplete.nvim-cmp.enable = true;
 
@@ -160,6 +168,8 @@
           nix.enable = true;
           ts.enable = true;
           rust.enable = true;
+          bash.enable = true;
+          python.enable = true;
         };
       };
     };
@@ -175,6 +185,8 @@
 	nixcfg = "sudo nvim /etc/nixos/";
 	homecfg = "sudo nvim /etc/nixos/hosts/ThinkPad/home.nix";
 	flakecfg = "sudo nvim /etc/nixos/flake.nix";
+        work = "nix-shell /home/felix/Shells/Networking/shell.nix";
+        vpnup = "sudo openvpn --config /home/felix/Downloads/VPNs/pfSense-UDP4-1194-f.busch-config.ovpn";
     };
   };
   
