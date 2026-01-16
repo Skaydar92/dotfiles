@@ -4,11 +4,9 @@
 
 { config, pkgs, ... }:
 
-{
-  imports = [ ];
+{ imports = [ ];
   
-  hardware.bluetooth = {
-    enable = true;
+  hardware.bluetooth = { enable = true;
     powerOnBoot = true;
     settings = {
       General = {
@@ -27,6 +25,7 @@
 
   networking.firewall = { 
     enable = true;
+    allowedTCPPorts = [ 8787 ];
     allowedTCPPortRanges = [ 
       { from = 1714; to = 1764; } # KDE Connect
     ];  
@@ -67,6 +66,16 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
+
+  services.static-web-server = {
+    enable = true;
+    root = "/home/felix/Webserver/";
+    configuration = {
+      general = {
+        directory-listing = true;
+      };
+    };
+  };
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm = {
@@ -134,10 +143,10 @@
 
   programs.firefox.enable = true;
 
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  # };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   programs.nvf = {
     enable = true;
@@ -150,13 +159,13 @@
         };
         theme = {
           enable = true;
-          name = "catppuccin";
-          style = "mocha";
+          name = "everforest";
+          style = "hard";
         };
 
         statusline.lualine = {
           enable = true;
-          theme = "catppuccin";
+          theme = "everforest";
         };
 
         telescope.enable = true;
@@ -185,7 +194,8 @@
 	nixcfg = "sudo nvim /etc/nixos/";
 	homecfg = "sudo nvim /etc/nixos/hosts/ThinkPad/home.nix";
 	flakecfg = "sudo nvim /etc/nixos/flake.nix";
-        work = "nix-shell /home/felix/Shells/Networking/shell.nix";
+        work = "nix-shell /home/felix/Shells/Networking/networking.nix";
+        webs = "nix-shell /home/felix/Shells/Networking/webserver.nix";
         vpnup = "sudo openvpn --config /home/felix/Downloads/VPNs/pfSense-UDP4-1194-f.busch-config.ovpn";
     };
   };
@@ -222,6 +232,9 @@
 	pkgs.zsh-powerlevel10k
 	pkgs.neovim
         pkgs.elegant-sddm
+        pkgs.quickshell
+        pkgs.noctalia-shell
+        pkgs.spotify
 	eza
 	vim
   ];
